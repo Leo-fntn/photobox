@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>index td8 : fetch</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<main id="photo">
+
+<section id="buttons">
+
+<button id="btnFirst">first</button>
+<button id="btnPrev">prev</button>
+<button id="btnLoad">load</button>
+<button id="btnNext">next</button>
+<button id="btnLast">last</button>
+
+</section>
+
+<section id="galerie">
+</section>
+
+<section id="la_photo">
+</section>
+
+<div id="lightbox" class="lightbox hidden">
+    <div id="lightbox-content">
+        <button id="lightbox-close">&times;</button>
+        <button id="lightbox-prev" class="lightbox-nav">&#8249;</button>
+        <button id="lightbox-next" class="lightbox-nav">&#8250;</button>
+        <div id="lightbox-image-container">
+            
+        </div>
+    </div>
+</div>
+</main>
+
+<script id="photoTemplate" type="text/x-handlebars-template">
+	{{#with photo}}
+		<h1>Photo : {{id}}</h1>
+		<img src="{{url.href}}">
+		<h4>{{titre}}</h4>
+		<p>{{descr}}</p>
+		<p>{{type}}, {{width}} x {{height}}</p>
+		<h4 id="la_categorie">categorie : categorie de l'image</h4>
+		<h4>commentaires : </h4>
+		<ul id="les_commentaires">
+			<li>pseudo : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, vitae.</li>
+			<li>pseudo : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, recusandae.</li>
+	  	</ul>
+
+		<div id="comment-form">
+			<h4>Ajouter un commentaire :</h4>
+			<form id="addCommentForm" data-photo-id="{{id}}">
+				<input type="text" id="commentPseudo" placeholder="Votre pseudo" required>
+				<input type="text" id="commentTitle" placeholder="Titre du commentaire" required>
+				<textarea id="commentContent" placeholder="Votre commentaire" required></textarea>
+				<button type="submit">Ajouter</button>
+			</form>
+		</div>
+	{{/with}} 
+</script>
+
+<script id="categorieTemplate" type="text/x-handlebars-template">
+	{{#with categorie}}
+		categorie : {{nom}}
+	{{/with}}
+</script>
+
+<script id="commentairesTemplate" type="text/x-handlebars-template">
+	{{#each comments}}
+		<li>{{pseudo}} : {{content}}</li>
+	{{/each}}
+</script>
+
+
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src='out.js' defer ></script>
+</body>
+</html>
