@@ -5784,26 +5784,26 @@
   };
 
   // js/gallery.js
-  var prev;
-  var next;
-  var first;
-  var last;
+  var prevGallery;
+  var nextGallery;
+  var firstGallery;
+  var lastGallery;
   function load(uri) {
     return photoloader_default.loadRessource(uri).then((ressource) => {
-      prev = ressource.links.prev.href;
-      next = ressource.links.next.href;
-      first = ressource.links.first.href;
-      last = ressource.links.last.href;
+      prevGallery = ressource.links.prev.href;
+      nextGallery = ressource.links.next.href;
+      firstGallery = ressource.links.first.href;
+      lastGallery = ressource.links.last.href;
       document.querySelector("#btnFirst").disabled = false;
       document.querySelector("#btnLast").disabled = false;
       document.querySelector("section#la_photo").innerHTML = "";
       switch (uri) {
-        case first:
-          prev = last;
+        case firstGallery:
+          prevGallery = lastGallery;
           document.querySelector("#btnFirst").disabled = true;
           break;
-        case last:
-          next = first;
+        case lastGallery:
+          nextGallery = firstGallery;
           document.querySelector("#btnLast").disabled = true;
           break;
         default:
@@ -5822,23 +5822,23 @@
     });
   }
   function prev() {
-    if (prev) {
-      return load(prev);
+    if (prevGallery) {
+      return load(prevGallery);
     }
   }
   function next() {
-    if (next) {
-      return load(next);
+    if (nextGallery) {
+      return load(nextGallery);
     }
   }
   function first() {
-    if (first) {
-      return load(first);
+    if (firstGallery) {
+      return load(firstGallery);
     }
   }
   function last() {
-    if (last) {
-      return load(last);
+    if (lastGallery) {
+      return load(lastGallery);
     }
   }
   var gallery_default = {
@@ -5968,32 +5968,44 @@
     getGallery("/www/canals5/phox/api/photos/?page=1&size=10");
   });
   document.querySelector("#btnNext").addEventListener("click", function() {
-    gallery_default.next().then((galerie) => {
-      gallery_ui_default.displayGallery(galerie);
-    }).catch((error) => {
-      console.error(`Erreur lors de l'affichage de la galerie suivante : ${error.message}`);
-    });
+    const next2 = gallery_default.next();
+    if (next2 !== void 0) {
+      next2.then((galerie) => {
+        gallery_ui_default.displayGallery(galerie);
+      }).catch((error) => {
+        console.error(`Erreur lors de l'affichage de la galerie suivante : ${error.message}`);
+      });
+    }
   });
   document.querySelector("#btnPrev").addEventListener("click", function() {
-    gallery_default.prev().then((galerie) => {
-      gallery_ui_default.displayGallery(galerie);
-    }).catch((error) => {
-      console.error(`Erreur lors de l'affichage de la galerie pr\xE9c\xE9dente : ${error.message}`);
-    });
+    const prev2 = gallery_default.prev();
+    if (prev2 !== void 0) {
+      prev2.then((galerie) => {
+        gallery_ui_default.displayGallery(galerie);
+      }).catch((error) => {
+        console.error(`Erreur lors de l'affichage de la galerie pr\xE9c\xE9dente : ${error.message}`);
+      });
+    }
   });
   document.querySelector("#btnFirst").addEventListener("click", function() {
-    gallery_default.first().then((galerie) => {
-      gallery_ui_default.displayGallery(galerie);
-    }).catch((error) => {
-      console.error(`Erreur lors de l'affichage de la premi\xE8re galerie : ${error.message}`);
-    });
+    const first2 = gallery_default.first();
+    if (first2 !== void 0) {
+      first2.then((galerie) => {
+        gallery_ui_default.displayGallery(galerie);
+      }).catch((error) => {
+        console.error(`Erreur lors de l'affichage de la premi\xE8re galerie : ${error.message}`);
+      });
+    }
   });
   document.querySelector("#btnLast").addEventListener("click", function() {
-    gallery_default.last().then((galerie) => {
-      gallery_ui_default.displayGallery(galerie);
-    }).catch((error) => {
-      console.error(`Erreur lors de l'affichage de la derni\xE8re galerie : ${error.message}`);
-    });
+    const last2 = gallery_default.last();
+    if (last2 !== void 0) {
+      last2.then((galerie) => {
+        gallery_ui_default.displayGallery(galerie);
+      }).catch((error) => {
+        console.error(`Erreur lors de l'affichage de la derni\xE8re galerie : ${error.message}`);
+      });
+    }
   });
   document.addEventListener("submit", function(e) {
     if (e.target.id === "addCommentForm") {

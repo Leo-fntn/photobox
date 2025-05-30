@@ -1,19 +1,20 @@
 import photoloader from "./photoloader";
 
-var prev;
-var next;
-var first;
-var last;
+var prevGallery;
+var nextGallery;
+var firstGallery;
+var lastGallery;
+
 
 function load(uri){
     // On charge la ressource
     return photoloader.loadRessource(uri)
         .then((ressource) => {
             // on récupère les liens vers les autres galeries : 
-            prev = ressource.links.prev.href;
-            next = ressource.links.next.href;
-            first = ressource.links.first.href;
-            last = ressource.links.last.href;
+            prevGallery = ressource.links.prev.href;
+            nextGallery = ressource.links.next.href;
+            firstGallery = ressource.links.first.href;
+            lastGallery = ressource.links.last.href;
             document.querySelector('#btnFirst').disabled = false;
             document.querySelector('#btnLast').disabled = false;
 
@@ -22,12 +23,12 @@ function load(uri){
 
             // on fait des changements si on est déjà sur la première/dernière page
             switch (uri) {
-                case first:
-                    prev = last;
+                case firstGallery:
+                    prevGallery = lastGallery;
                     document.querySelector('#btnFirst').disabled = true;
                     break;
-                case last:
-                    next = first;
+                case lastGallery:
+                    nextGallery = firstGallery;
                     document.querySelector('#btnLast').disabled = true;
                     break;
                 default:
@@ -54,26 +55,26 @@ function load(uri){
 }
 
 function prev(){
-    if (prev) {
-        return load(prev);
+    if (prevGallery) {
+        return load(prevGallery);
     }
 }
 
 function next(){
-    if (next) {
-        return load(next);
+    if (nextGallery) {
+        return load(nextGallery);
     }
 }
 
 function first(){
-    if (first) {
-        return load(first);
+    if (firstGallery) {
+        return load(firstGallery);
     }
 }
 
 function last(){
-    if (last) {
-        return load(last);
+    if (lastGallery) {
+        return load(lastGallery);
     }
 }
 

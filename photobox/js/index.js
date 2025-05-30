@@ -55,43 +55,55 @@ document.querySelector('#btnLoad').addEventListener('click', function() {
 });
 
 document.querySelector('#btnNext').addEventListener('click', function() {
-    gallery.next()
+    const next = gallery.next();
+    if (next !== undefined) {
+        next
         .then(galerie => {
             gallery_ui.displayGallery(galerie);
         })
         .catch(error => {
             console.error(`Erreur lors de l'affichage de la galerie suivante : ${error.message}`);
         });
+    }
 });
 
 document.querySelector('#btnPrev').addEventListener('click', function() {
-    gallery.prev()
+    const prev = gallery.prev();
+    if (prev !== undefined) {
+        prev
         .then(galerie => {
             gallery_ui.displayGallery(galerie);
         })
         .catch(error => {
             console.error(`Erreur lors de l'affichage de la galerie précédente : ${error.message}`);
         });
+    }
 });
 
 document.querySelector('#btnFirst').addEventListener('click', function() {
-    gallery.first()
+    const first = gallery.first();
+    if (first !== undefined) {
+        first
         .then(galerie => {
             gallery_ui.displayGallery(galerie);
         })
         .catch(error => {
             console.error(`Erreur lors de l'affichage de la première galerie : ${error.message}`);
         });
+    }
 });
 
 document.querySelector('#btnLast').addEventListener('click', function() {
-    gallery.last()
+    const last = gallery.last();
+    if (last!== undefined) {
+        last
         .then(galerie => {
             gallery_ui.displayGallery(galerie);
         })
         .catch(error => {
             console.error(`Erreur lors de l'affichage de la dernière galerie : ${error.message}`);
         });
+    }
 });
 
 
